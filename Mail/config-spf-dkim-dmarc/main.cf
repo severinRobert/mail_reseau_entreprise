@@ -21,12 +21,12 @@ smtpd_recipient_restrictions = permit_mynetworks permit_sasl_authenticated rejec
 
 # Main configs
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = mail.l2-5.ephec-ti.be
-mydomain = l2-5.ephec-ti.be
+myhostname = mail.aled.fun
+mydomain = aled.fun
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-myorigin = l2-5.ephec-ti.be
-mydestination = $myhostname, localhost.localdomain, localhost.l2-5.ephec-ti.be, localhost
+myorigin = aled.fun
+mydestination = $myhostname, localhost.localdomain, localhost.aled.fun, localhost
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0
 recipient_delimiter = +
