@@ -16,13 +16,6 @@ RUN apt update
 RUN apt-get install mariadb-server -y
 
 
-COPY myscript/* /usr/bin/
-RUN chmod +x /usr/bin/addmailusers
-RUN chmod +x /usr/bin/delmailusers
-RUN chmod +x /usr/bin/showmailusers
-RUN chmod +x /usr/bin/readmailadmins
-RUN chmod +x /usr/bin/readmailusers
-
 #Configuration - MariaDB
 
 COPY configuration-sql/create-db.sql config-sql/create-db.sql
