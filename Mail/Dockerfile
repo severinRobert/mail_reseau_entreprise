@@ -9,7 +9,7 @@ RUN apt-get install sudo -y
 
 
 # Génération du certificat SSL
-RUN openssl req -new -x509 -days 3650 -nodes -newkey rsa:4096 -out /etc/ssl/certs/mailserver.pem -keyout /etc/ssl/private/mailserver.pem -subj "/C=BE/ST=Braban-wallon/L=Wavre/O=Ephec/OU=IT/CN=mail.l2-5.ephec-ti.be"
+RUN openssl req -new -x509 -days 3650 -nodes -newkey rsa:4096 -out /etc/ssl/certs/mailserver.pem -keyout /etc/ssl/private/mailserver.pem -subj "/C=BE/ST=Braban-wallon/L=Wavre/O=Ephec/OU=IT/CN=mail.aled.fun"
 
 # Installation Database
 RUN apt update
@@ -85,10 +85,10 @@ RUN chmod go-rw /etc/opendkim/keys
 COPY config-spf-dkim-dmarc/signing.table /etc/opendkim/signing.table
 COPY config-spf-dkim-dmarc/key.table /etc/opendkim/key.table
 COPY config-spf-dkim-dmarc/trusted.hosts /etc/opendkim/trusted.hosts
-RUN mkdir /etc/opendkim/keys/l2-5.ephec-ti.be
-RUN opendkim-genkey -b 2048 -d l2-5.ephec-ti.be -D /etc/opendkim/keys/l2-5.ephec-ti.be -s default -v
-RUN chown opendkim:opendkim /etc/opendkim/keys/l2-5.ephec-ti.be/default.private
-RUN cat /etc/opendkim/keys/l2-5.ephec-ti.be/default.txt
+RUN mkdir /etc/opendkim/keys/aled.fun
+RUN opendkim-genkey -b 2048 -d aled.fun -D /etc/opendkim/keys/aled.fun -s default -v
+RUN chown opendkim:opendkim /etc/opendkim/keys/aled.fun/default.private
+RUN cat /etc/opendkim/keys/aled.fun/default.txt
 
 
 
