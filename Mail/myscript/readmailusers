@@ -20,7 +20,7 @@ printf "$R Prenom : $B"
 read -r b
 printf "$N"
 prenom=$(echo "$b" | awk '{print tolower($0)}')
-mail="$nom.$prenom@l2-5.ephec-ti.be"
+mail="$nom.$prenom@aled.fun"
 
 # Mail + Connection
 printf "Connection au$M serveur mail...$Y Démarrage du client mail...$N\n"

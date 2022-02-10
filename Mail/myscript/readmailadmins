@@ -15,42 +15,42 @@ if [ $# -eq 0 ]; then
 
 elif [ $1 = "sebastien" ] 
 then
-        if [ -d "/var/mail/vhosts/l2-5.ephec-ti.be/sebastien/" ]
+        if [ -d "/var/mail/vhosts/aled.fun/sebastien/" ]
         then
                 printf "local mail user$B found$N, connecting...\n"
                 sleep 1
-                mutt -f /var/mail/vhosts/l2-5.ephec-ti.be/sebastien/
+                mutt -f /var/mail/vhosts/aled.fun/sebastien/
         else
                 printf "local mail user$R not found$N, connecting to remote mail server...\n"
-                printf "PS: Your username is :$Y sebastien@l2-5.ephec-ti.be$N\n"
+                printf "PS: Your username is :$Y sebastien@aled.fun$N\n"
                 sleep 2
                 mutt -f imaps://135.125.101.234:993
         fi
 
 elif [ $1 = "valentin" ]
 then
-        if [ -d "/var/mail/vhosts/l2-5.ephec-ti.be/valentin/" ]
+        if [ -d "/var/mail/vhosts/aled.fun/valentin/" ]
         then
                 printf "local mail user$B found$N, connecting...\n"
                 sleep 1
-                mutt -f /var/mail/vhosts/l2-5.ephec-ti.be/valentin/
+                mutt -f /var/mail/vhosts/aled.fun/valentin/
         else
                 printf "local mail user$R not found$N, connecting to remote mail server...\n"
-                printf "PS: Your username is :$Y valentin@l2-5.ephec-ti.be$N\n"
+                printf "PS: Your username is :$Y valentin@aled.fun$N\n"
                 sleep 2
                 mutt -f imaps://135.125.101.234:993
         fi
 
 elif [ $1 = "florian" ]
 then
-        if [ -d "/var/mail/vhosts/l2-5.ephec-ti.be/florian/" ]
+        if [ -d "/var/mail/vhosts/aled.fun/florian/" ]
         then
                 printf "local mail user$B found$N, connecting...\n"
                 sleep 1
-                mutt -f /var/mail/vhosts/l2-5.ephec-ti.be/florian/
+                mutt -f /var/mail/vhosts/aled.fun/florian/
         else
                 printf "local mail user$R not found$N, connecting to remote mail server...\n"
-                printf "PS: Your username is :$Y florian@l2-5.ephec-ti.be$N\n"
+                printf "PS: Your username is :$Y florian@aled.fun$N\n"
                 sleep 2
                 mutt -f imaps://135.125.101.234:993
         fi

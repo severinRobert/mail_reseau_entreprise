@@ -22,7 +22,7 @@ printf "$M--------------$N\n"
 read b
 prenom=$(echo "$b" | awk '{print tolower($0)}')
 fullname="$nom.$prenom"
-mail="$nom.$prenom@l2-5.ephec-ti.be"
+mail="$nom.$prenom@aled.fun"
 
 # demande du password
 printf "$M--------------$N\n"
@@ -61,7 +61,7 @@ az='$6$'
 echo "INSERT INTO \`maildb\`.\`virtual_users\`" > script.sql
 echo "(\`id\`, \`domain_id\`, \`password\` , \`email\`, \`maildir\`)" >> script.sql
 echo -e "VALUES" >> script.sql
-echo -e "('0', '1', ENCRYPT('$c', CONCAT('$az', SUBSTRING(SHA(RAND()), -16))), '$mail', 'l2-5.ephec-ti.be/$fullname/');" >> script.sql
+echo -e "('0', '1', ENCRYPT('$c', CONCAT('$az', SUBSTRING(SHA(RAND()), -16))), '$mail', 'aled.fun/$fullname/');" >> script.sql
 mysql -u root <<MY_QUERY
 SOURCE script.sql
 MY_QUERY
