@@ -9,12 +9,19 @@ RUN apt-get install sudo -y
 
 
 # Génération du certificat SSL
-RUN openssl req -new -x509 -days 3650 -nodes -newkey rsa:4096 -out /etc/ssl/certs/mailserver.pem -keyout /etc/ssl/private/mailserver.pem -subj "/C=BE/ST=Braban-wallon/L=Wavre/O=Ephec/OU=IT/CN=mail.aled.fun"
+RUN openssl req -new -x509 -days 3650 -nodes -newkey rsa:4096 -out /etc/ssl/certs/mailserver.pem -keyout /etc/ssl/private/mailserver.pem -subj "/C=BE/ST=Braban-wallon/L=Wavre/O=Ephec/OU=IT/CN=mail.l2-5.ephec-ti.be"
 
 # Installation Database
 RUN apt update
 RUN apt-get install mariadb-server -y
 
+
+COPY myscript/* /usr/bin/
+RUN chmod +x /usr/bin/addmailusers
+RUN chmod +x /usr/bin/delmailusers
+RUN chmod +x /usr/bin/showmailusers
+RUN chmod +x /usr/bin/readmailadmins
+RUN chmod +x /usr/bin/readmailusers
 
 #Configuration - MariaDB
 
@@ -68,36 +75,7 @@ RUN chown spamd:spamd /var/log/spamassassin
 COPY configuration-spam/spamassassin /etc/default/spamassassin
 COPY configuration-spam/local.cf /etc/spamassassin/local.cf
 
-#SPF
-RUN apt install postfix-policyd-spf-python
-COPY config-spf-dkim-dmarc/master.cf /etc/postfix/master.cf
-COPY config-spf-dkim-dmarc/main.cf /etc/postfix/main.cf
-
-# Installation de DKIM / DMARC 
-RUN apt-get install opendkim opendkim-tools
-RUN gpasswd -a postfix opendkim
-RUN apt-get install opendmarc
-COPY config-spf-dkim-dmarc/opendkim.conf /etc/opendkim.conf
-RUN mkdir /etc/opendkim
-RUN mkdir /etc/opendkim/keys
-RUN chown -R opendkim:opendkim /etc/opendkim
-RUN chmod go-rw /etc/opendkim/keys
-COPY config-spf-dkim-dmarc/signing.table /etc/opendkim/signing.table
-COPY config-spf-dkim-dmarc/key.table /etc/opendkim/key.table
-COPY config-spf-dkim-dmarc/trusted.hosts /etc/opendkim/trusted.hosts
-RUN mkdir /etc/opendkim/keys/aled.fun
-RUN opendkim-genkey -b 2048 -d aled.fun -D /etc/opendkim/keys/aled.fun -s default -v
-RUN chown opendkim:opendkim /etc/opendkim/keys/aled.fun/default.private
-RUN cat /etc/opendkim/keys/aled.fun/default.txt
-
-
-
-#Lier postfix et dkim
-
-RUN mkdir /var/spool/postfix/opendkim
-RUN chown opendkim:postfix /var/spool/postfix/opendkim
-
 
 # lance le docker
 
-CMD ["sh", "-c", "service mysql start; mysql -u root < config-sql/create-db.sql; mysql -u root < config-sql/create-users.sql; service postfix start; service opendkim start; service spamassassin start; service opendmarc start; service dovecot start; tail -F /var/log/mail.log"]
+CMD ["sh", "-c", "service mysql start; mysql -u root < config-sql/create-db.sql; mysql -u root < config-sql/create-users.sql; service postfix start; service spamassassin start; service dovecot start; tail -F /var/log/mail.log"]
